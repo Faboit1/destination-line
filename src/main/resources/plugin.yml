@@ -1,0 +1,31 @@
+name: DestinationLine
+version: 1.0.0
+main: com.faboit.destinationline.DestinationLinePlugin
+api-version: '1.20'
+authors: [Faboit1]
+description: Packet-only destination guidance system with waypoint trail
+
+commands:
+  showdestination:
+    description: Show a destination for a specific player
+    usage: /showdestination <player> <destinationNumber>
+    permission: destination.show
+  hidedestination:
+    description: Hide a player's destination guidance
+    usage: /hidedestination <player>
+    permission: destination.hide
+  listdestinations:
+    description: List all configured destinations
+    usage: /listdestinations
+    permission: destination.list
+
+permissions:
+  destination.show:
+    description: Allows showing destinations to players
+    default: op
+  destination.hide:
+    description: Allows hiding destination guidance
+    default: op
+  destination.list:
+    description: Allows listing destinations
+    default: true

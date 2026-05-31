@@ -1,0 +1,27 @@
+settings:
+  updateTicks: 5
+  maxTrailLength: 35.0
+  trailSpacing: 1.2
+
+destinations:
+  "1":
+    name: Spawn Village
+    world: world
+    x: 0.5
+    y: 65.0
+    z: 0.5
+    displayText: "Head to Spawn Village"
+    particle: REDSTONE
+    color:
+      red: 0
+      green: 200
+      blue: 255
+    size: 1.3
+  "2":
+    name: Mining Camp
+    world: world
+    x: 120.0
+    y: 70.0
+    z: -85.0
+    displayText: "Mining Camp"
+    particle: END_ROD
