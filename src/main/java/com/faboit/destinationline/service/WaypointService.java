@@ -17,6 +17,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class WaypointService {
     private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("0.0");
+    private static final double DESTINATION_MARKER_XZ_OFFSET = 0.5D;
+    private static final double DESTINATION_MARKER_Y_OFFSET = 1.0D;
+    private static final double TRAIL_START_OFFSET = 1.5D;
+    private static final double MIN_TRAIL_SPACING = 0.3D;
 
     private final JavaPlugin plugin;
     private final DestinationManager destinationManager;
@@ -80,7 +84,8 @@ public class WaypointService {
     }
 
     private void renderForPlayer(Player player, Destination destination) {
-        Location destinationLocation = destination.getLocation().clone().add(0.5, 1.0, 0.5);
+        Location destinationLocation = destination.getLocation().clone()
+                .add(DESTINATION_MARKER_XZ_OFFSET, DESTINATION_MARKER_Y_OFFSET, DESTINATION_MARKER_XZ_OFFSET);
 
         if (!player.getWorld().equals(destinationLocation.getWorld())) {
             sendActionBar(player, "§eDestination in world: §f" + destinationLocation.getWorld().getName());
@@ -106,7 +111,7 @@ public class WaypointService {
                 : null;
 
         // Spawn a packet-only line for this player (spawnParticle(Player) is client-targeted).
-        for (double current = 1.5D; current <= drawUntil; current += Math.max(0.3D, spacing)) {
+        for (double current = TRAIL_START_OFFSET; current <= drawUntil; current += Math.max(MIN_TRAIL_SPACING, spacing)) {
             Location point = from.clone().add(direction.clone().multiply(current));
             if (dustOptions != null) {
                 player.spawnParticle(particle, point, 1, dustOptions);
